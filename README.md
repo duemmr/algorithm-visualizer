@@ -50,8 +50,14 @@ An algorithm visualizer web application built in **F#**, compiling to JavaScript
    ```
 2. Build the app
     ```bash
-    TBD
+    npm install
+    npm run build
     ```
+3. Public files ready to be used
+    ```bash
+    cd public
+    ```
+   
 
 ## License
 
