@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+  <title>AlgoVizu</title>
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="index.css">
+  <link rel="shortcut icon" href="fable.ico" />
+</head>
+<body>
+<body>
+    <div class="title">
+        <h1>AlgoVizu</h1>
+    </div>
+
+    <div class="dashboard">
+        <div id="panel1" class="panel">
+            <div class="panel-header algorithm-header">
+                <h2 class="panel-title">Algorithm description</h2>
+                <p class="panel-subtitle">Algorithm overview</p>
+            </div>
+            <div class="panel-body overflow-hidden">
+                <div class="algorithm-info">
+                    <div id="algorithmName" class="algorithm-name">Name of algorithm</div>
+                    <div id="algorithmType" class="algorithm-type">Type of algorithm</div>
+                    
+                    <p id="algorithmDescription" class="algorithm-description">Description of algorithm</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="panel2" class="panel">
+            <div class="panel-header performance-header">
+                <h2 class="panel-title">Performance analysis</h2>
+                <p class="panel-subtitle">Efficiency metrics</p>
+            </div>
+            <div class="panel-body overflow-hidden">
+                <div class="metric-group">
+                    <div class="metric-label">
+                        <span class="metric-label-icon">T</span>
+                        Time complexity
+                    </div>
+                    <div class="metric-value">
+                        <span class="average">Average: <span id="averageTimeComplexity" class="formula">-</span></span><br>
+                        <span class="worst-case">Worst Case: <span id="worstTimeComplexity" class="formula">-</span></span>
+                    </div>
+                </div>
+                
+                <div class="metric-group">
+                    <div class="metric-label">
+                        <span class="metric-label-icon">S</span>
+                        Space complexity
+                    </div>
+                    <div class="metric-value">
+                        <span id="spaceComplexity" class="formula">-</span>
+                    </div>
+                </div>
+                
+                <div class="metric-group">
+                    <div class="metric-label">
+                        <span class="metric-label-icon">O</span>
+                        Operations
+                    </div>
+                    <div class="operations-container">
+                        <div id="operationCounter" class="operations-badge">0</div>
+                        <span>total operations performed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+        <div id="panel2" class="panel">
+            <div class="panel-header controls-header">
+                <h2 class="panel-title">Animation controls</h2>
+                <p class="panel-subtitle">Visualization settings</p>
+            </div>
+            <div class="panel-body">
+                <div class="control-group">
+                    <div class="control-label">
+                        Animation Speed 
+                        <span id="speedValue" class="speed-value">Very fast (1 ms)</span>
+                    </div>
+                    <div class="slider-container">
+                        <input type="range" id="speedSlider" class="slider" min="1" max="500" value="5">
+                    </div>
+                </div>
+
+                <div class="history-controls">
+                    <h3>Animation history</h3>
+                    <div id="historyCounter">No history recorded</div>
+                    
+                    <div class="slider-container">
+                        <input type="range" id="historySlider" class="slider" min="0" max="0" value="0" disabled>
+                    </div>
+                    
+                    <div class="history-navigation">
+                        <button id="prevStateBtn" class="btn btn-secondary disabled" disabled>←</button>
+                        <button id="nextStateBtn" class="btn btn-secondary disabled" disabled>→</button>
+                    </div>
+                </div>
+                
+                <div class="dropdown-container">
+                    <div class="control-label">Algorithm</div>
+                    <select id="algorithmSelect" class="dropdown">
+                        <option value="1" selected>Bubble sort</option>
+                        <option value="2">Selection sort</option>
+                        <option value="3">Insertion sort</option>
+                        <option value="4">Quick sort</option>
+                        <option value="5">Merge sort</option>
+                    </select>
+                </div>
+                    
+                <div class="button-group">
+                    <button id="generateBtn" class="btn btn-secondary">New array</button>
+                    <button id="startBtn" class="btn btn-primary">Start</button>
+                    <button id="resetBtn" class="btn btn-outline">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="visualization" id="visualizationContainer"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+    <script src="bundle.js"></script>
+</body>
+</html>
