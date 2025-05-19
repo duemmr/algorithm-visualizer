@@ -84,10 +84,16 @@ let updateHistoryControls (model: Model) =
         historyCounter.textContent <- sprintf "Step %d of %d" (model.CurrentHistoryIndex + 1) model.History.Length
     else
         historySlider.disabled <- true
-        historyCounter.textContent <- "No history"
+        historyCounter.textContent <- "No history recorded"
+
+    let isPrevStateBtnDisabled = model.CurrentHistoryIndex <= 0 || (model.IsRunning && not model.IsPaused)
+    let isNextStateBtnDisabled = model.CurrentHistoryIndex >= model.History.Length - 1 || (model.IsRunning && not model.IsPaused)
+
+    if isPrevStateBtnDisabled then prevStateBtn.classList.add("disabled") else prevStateBtn.classList.remove("disabled")
+    if isNextStateBtnDisabled then nextStateBtn.classList.add("disabled") else nextStateBtn.classList.remove("disabled")
     
-    prevStateBtn.disabled <- model.CurrentHistoryIndex <= 0 || (model.IsRunning && not model.IsPaused)
-    nextStateBtn.disabled <- model.CurrentHistoryIndex >= model.History.Length - 1 || (model.IsRunning && not model.IsPaused)
+    prevStateBtn.disabled <- isPrevStateBtnDisabled
+    nextStateBtn.disabled <- isNextStateBtnDisabled
 
 let bubbleSort (arr: int array) =
     let animations = ResizeArray<Animation>()
@@ -399,11 +405,19 @@ let rec processAnimations (model: Model) =
         let generateBtn = document.getElementById("generateBtn") :?> HTMLButtonElement
         let speedSlider = document.getElementById("speedSlider") :?> HTMLInputElement
         let resetBtn = document.getElementById("resetBtn") :?> HTMLButtonElement
+        let prevStateBtn = document.getElementById("prevStateBtn") :?> HTMLButtonElement
+        let nextStateBtn = document.getElementById("nextStateBtn") :?> HTMLButtonElement
         
         algorithmSelect.disabled <- false
         generateBtn.disabled <- false
         speedSlider.disabled <- false
+        prevStateBtn.disabled <- false
+        nextStateBtn.disabled <- false
         resetBtn.textContent <- "Reset"
+
+        prevStateBtn.classList.remove("disabled")
+        nextStateBtn.classList.remove("disabled")
+        generateBtn.classList.remove("disabled")
         
         updateHistoryControls finalModel
         
@@ -519,13 +533,6 @@ let main() =
         prevStateBtn.disabled <- state
         nextStateBtn.disabled <- state
         
-        if state then
-            prevStateBtn.classList.add("disabled")
-            nextStateBtn.classList.add("disabled")
-        else
-            prevStateBtn.classList.remove("disabled")
-            nextStateBtn.classList.remove("disabled")
-
         startBtn.textContent <- 
             if state then "Pause" 
             elif isPaused then "Resume"
@@ -541,6 +548,11 @@ let main() =
     updateUIState false false
     
     historySlider.oninput <- fun _ ->
+        model <- 
+            match globalModelRef with
+            | Some latestModel -> latestModel
+            | None -> model
+
         if not model.IsRunning || model.IsPaused then
             let index = int historySlider.value
             model <- restoreHistoryState model index
@@ -549,6 +561,11 @@ let main() =
         false
     
     prevStateBtn.onclick <- fun _ ->
+        model <- 
+            match globalModelRef with
+            | Some latestModel -> latestModel
+            | None -> model
+
         if not model.IsRunning || model.IsPaused then
             if model.CurrentHistoryIndex > 0 then
                 let newIndex = model.CurrentHistoryIndex - 1
@@ -558,6 +575,11 @@ let main() =
         false
     
     nextStateBtn.onclick <- fun _ ->
+        model <- 
+                match globalModelRef with
+                | Some latestModel -> latestModel
+                | None -> model
+
         if not model.IsRunning || model.IsPaused then
             if model.CurrentHistoryIndex < model.History.Length - 1 then
                 let newIndex = model.CurrentHistoryIndex + 1
@@ -567,6 +589,11 @@ let main() =
         false
     
     generateBtn.onclick <- fun _ ->
+        model <- 
+            match globalModelRef with
+            | Some latestModel -> latestModel
+            | None -> model
+
         if not model.IsRunning then
             let newArray = generateNewArray arraySize maxValue
             model <- { 
@@ -715,8 +742,9 @@ let main() =
                 IsPaused = true
                 AnimationTimer = None
             }
-                        
+
             globalModelRef <- Some model
+            updateHistoryControls model
         false
 
 document.addEventListener("DOMContentLoaded", (fun _ -> main()), false)
