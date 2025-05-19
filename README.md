@@ -38,6 +38,7 @@ An algorithm visualizer web application built in **F#**, compiling to JavaScript
 
 ### Prerequisites
 
+- **Node.js** LTS or later
 - **.NET SDK** 6.0 or later
 - **F#**
 
