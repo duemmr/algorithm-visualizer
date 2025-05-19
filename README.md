@@ -3,7 +3,7 @@
 An algorithm visualizer web application built in **F#**, compiling to JavaScript by using **Fable**.
 
 ## Try yourself!
-- [Live demo](https://duemmr.github.io)
+- [Live demo](https://duemmr.github.io/algorithm-visualizer/public/)
 
 ## Features
 
