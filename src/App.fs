@@ -13,6 +13,7 @@ open Types.Algorithm
 let algorithms = Static.algorithmDescriptions
 
 let mutable activeTimers: float list = []
+
 let mutable globalModelRef : Model option = None
 
 let initialModel = {
