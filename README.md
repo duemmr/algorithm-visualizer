@@ -26,13 +26,24 @@ An algorithm visualizer web application built in **F#**, compiling to JavaScript
 
 # Main
 
+https://github.com/user-attachments/assets/5b1fd113-6f24-4155-9a8c-891d5df8c110
+
 # Animation
+
+https://github.com/user-attachments/assets/f0e2c55a-fdb8-412e-9832-23a2171edb34
 
 # History
 
+https://github.com/user-attachments/assets/95d3ee01-d51b-4c41-9f2f-4d9ae83f18af
+
 # Speed control
 
+https://github.com/user-attachments/assets/df627d4a-b5dc-4ae4-a8f0-a1e5ca887cbd
+
 # New array
+
+https://github.com/user-attachments/assets/2ce692c7-b613-422c-88f0-dcd7faec9008
+
 
 ## Setup
 
