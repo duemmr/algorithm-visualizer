@@ -51,7 +51,6 @@ https://github.com/user-attachments/assets/2ce692c7-b613-422c-88f0-dcd7faec9008
 
 - **Node.js** LTS or later
 - **.NET SDK** 6.0 or later
-- **F#**
 
 ### Installation and usage
 
